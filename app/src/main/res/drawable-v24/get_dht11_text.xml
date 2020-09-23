@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--默认-->
+    <!--    <item android:drawable="@drawable/1" />-->
+
+    <!--设置按钮点击时，点击后，按钮这2种状态的改变和设置-->
+
+    <!--按钮按下时的设置  -->
+    <item android:drawable="@drawable/b5" android:state_pressed="false" />
+
+    <!--按钮松开时的设置  -->
+
+    <item android:drawable="@drawable/gray" android:state_pressed="true" />
+
+</selector>

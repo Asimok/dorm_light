@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">208</string>
+    <string name="openLeft_String">开左灯</string>
+    <string name="closeLeft_String">关左灯</string>
+    <string name="openRight_String">开右灯</string>
+    <string name="closeRight_String">关右灯</string>
+</resources>
