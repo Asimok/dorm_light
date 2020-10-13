@@ -73,6 +73,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/restart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
 
@@ -136,7 +137,7 @@
                 android:id="@+id/set_rightstatus_id"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.7"
                 android:gravity="center_vertical"
                 android:text="关"
                 android:textSize="25sp"

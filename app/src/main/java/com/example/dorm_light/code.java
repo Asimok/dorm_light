@@ -7,4 +7,6 @@ public class code {
     public static String closeRight_code = "{\"code\":\"closeRight\"}";
     public static String get_dht11 = "{\"code\":\"get_dht11\"}";
     public static String get_light_status = "{\"code\":\"get_light_status\"}";
+    public static String restart_code = "{\"code\":\"restart\"}";
+
 }
