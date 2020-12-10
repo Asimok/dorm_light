@@ -17,21 +17,19 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MQTTService extends Service {
 
-    public static final String TAG = "aaa";
+    public static final String TAG = "MQTTService";
 
     private static MqttAndroidClient client;
-    private static String myTopic = "dorm";      //要订阅的主题
+    private static final String myTopic = "dorm";      //要订阅的主题
     private MqttConnectOptions conOpt;
-    private String host = "tcp://39.96.68.13:1883";
-    private String userName = "admin";
-    private String passWord = "public";
-    private String clientId = "4B208_" + System.currentTimeMillis();//客户端标识
+    private final String host = "tcp://{ip}:1883";  //eg. tcp://192.168.1.1:1883
+    private final String userName = "admin";
+    private final String passWord = "public";
+    private final String clientId = "4B208_" + System.currentTimeMillis();//客户端标识
     private IGetMessageCallBack IGetMessageCallBack;
     // MQTT是否连接成功
     private IMqttActionListener iMqttActionListener = new IMqttActionListener() {
@@ -59,7 +57,7 @@ public class MQTTService extends Service {
         }
     };
     // MQTT监听并且接受消息
-    private MqttCallback mqttCallback = new MqttCallback() {
+    private final MqttCallback mqttCallback = new MqttCallback() {
 
         @Override
         public void messageArrived(String topic, MqttMessage message) throws Exception {
@@ -68,7 +66,7 @@ public class MQTTService extends Service {
             if (IGetMessageCallBack != null) {
                 IGetMessageCallBack.setMessage(str1);
             }
-            String str2 = topic + ";qos:" + message.getQos() + ";retained:" + message.isRetained();
+//            String str2 = topic + ";qos:" + message.getQos() + ";retained:" + message.isRetained();
             Log.i(TAG, "messageArrived:" + str1);
 //            Log.i(TAG, str2);
         }
@@ -86,12 +84,10 @@ public class MQTTService extends Service {
     };
 
     public static void publish(String msg) {
-        String topic = myTopic;
-        Integer qos = 0;
-        Boolean retained = false;
+        int qos = 0;
         try {
             if (client != null) {
-                client.publish(topic, msg.getBytes(), qos.intValue(), retained.booleanValue());
+                client.publish(myTopic, msg.getBytes(), qos, false);
             }
         } catch (MqttException e) {
             e.printStackTrace();
@@ -107,11 +103,10 @@ public class MQTTService extends Service {
 
     private void init() {
         // 服务器地址（协议+地址+端口号）
-        String uri = host;
-        client = new MqttAndroidClient(this, uri, clientId);
+        String url = host;
+        client = new MqttAndroidClient(this, url, clientId);
         // 设置MQTT监听并且接受消息
         client.setCallback(mqttCallback);
-
         conOpt = new MqttConnectOptions();
         // 清除缓存
         conOpt.setCleanSession(true);
@@ -207,7 +202,7 @@ public class MQTTService extends Service {
 
     public void toCreateNotification(String message) throws JSONException {
 
-        if (!message.contains("code")&&!message.contains("sensor")) {
+        if (!message.contains("code") && !message.contains("sensor")) {
             MyNotification notify = new MyNotification(getApplicationContext());
             notify.MyNotification("智能开关——收到信息", message, R.drawable.light,
                     "dorm", "dorm_rec", 1, "dorm");

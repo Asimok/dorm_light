@@ -4,8 +4,10 @@
       <w>arduino</w>
       <w>humi</w>
       <w>mqtt</w>
+      <w>mynotify</w>
       <w>openleft</w>
       <w>switchlight</w>
+      <w>tstatus</w>
     </words>
   </dictionary>
 </component>

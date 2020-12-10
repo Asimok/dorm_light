@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flyco.dialog.widget.base.BaseDialog;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -185,10 +184,8 @@ public class MainActivity extends AppCompatActivity implements IGetMessageCallBa
             setRight_tv.setText(right_status);
 
         }
-
         mqttService = serviceConnection.getMqttService();
         mqttService.toCreateNotification(message);
-
 
     }
 
@@ -216,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements IGetMessageCallBa
         private ImageView back;
 
         public AdDialog(Context context) {
-            super( context);
+            super(context);
             this.context = (Context) context;
         }
 

@@ -15,7 +15,6 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 
-
 public class MyNotification extends ContextWrapper {
     //final static String GROUP_KEY_EMAILS = "group_key_emails";
     public MyNotification(Context base) {
