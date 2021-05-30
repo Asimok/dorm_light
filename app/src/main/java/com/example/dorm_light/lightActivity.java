@@ -12,11 +12,16 @@ import android.widget.Button;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.example.dorm_light.light_code.closeLight0_code;
+import static com.example.dorm_light.light_code.closeLight1_code;
+import static com.example.dorm_light.light_code.closeLight2_code;
+import static com.example.dorm_light.light_code.closeLight3_code;
 import static com.example.dorm_light.light_code.get_light_status;
 import static com.example.dorm_light.light_code.openLight0_code;
 import static com.example.dorm_light.light_code.openLight1_code;
 import static com.example.dorm_light.light_code.openLight2_code;
 import static com.example.dorm_light.light_code.openLight3_code;
+
 
 public class lightActivity extends AppCompatActivity implements IGetMessageCallBack {
     private Button light0, light1, light2, light3;
@@ -49,26 +54,37 @@ public class lightActivity extends AppCompatActivity implements IGetMessageCallB
         light0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                MQTTService.publish(openLight0_code);
+                if (!light0_status_bool)
+                    MQTTService.publish(openLight0_code);
+                else
+                    MQTTService.publish(closeLight0_code);
             }
         });
         light1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MQTTService.publish(openLight1_code);
+                if (!light1_status_bool)
+                    MQTTService.publish(openLight1_code);
+                else
+                    MQTTService.publish(closeLight1_code);
             }
         });
         light2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MQTTService.publish(openLight2_code);
+                if (!light2_status_bool)
+                    MQTTService.publish(openLight2_code);
+                else
+                    MQTTService.publish(closeLight2_code);
             }
         });
         light3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MQTTService.publish(openLight3_code);
+                if (!light3_status_bool)
+                    MQTTService.publish(openLight3_code);
+                else
+                    MQTTService.publish(closeLight3_code);
             }
         });
 
@@ -80,6 +96,9 @@ public class lightActivity extends AppCompatActivity implements IGetMessageCallB
                     MQTTService.publish(get_light_status);
                 } else {
                     light0.setText("与服务器断开连接");
+                    light1.setText("与服务器断开连接");
+                    light2.setText("与服务器断开连接");
+                    light3.setText("与服务器断开连接");
                 }
                 handler.postDelayed(this, get_delay);
             }
@@ -98,10 +117,10 @@ public class lightActivity extends AppCompatActivity implements IGetMessageCallB
             Log.d("log", "解析开关状态");
 //          解析指令
             JSONObject obj = new JSONObject(message);
-             light0_status_bool = obj.getBoolean("light0");
-             light1_status_bool = obj.getBoolean("light1");
-             light2_status_bool = obj.getBoolean("light2");
-             light3_status_bool = obj.getBoolean("light3");
+            light0_status_bool = obj.getBoolean("light0");
+            light1_status_bool = obj.getBoolean("light1");
+            light2_status_bool = obj.getBoolean("light2");
+            light3_status_bool = obj.getBoolean("light3");
 
             String light0_status = light0_status_bool ? "开关0 - 打开" : "开关0 - 关闭";
             String light1_status = light1_status_bool ? "开关1 - 打开" : "开关1 - 关闭";
