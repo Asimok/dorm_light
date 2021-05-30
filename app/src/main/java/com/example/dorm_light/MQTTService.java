@@ -22,14 +22,13 @@ import org.json.JSONException;
 public class MQTTService extends Service {
 
     public static final String TAG = "MQTTService";
-
     private static MqttAndroidClient client;
     private static final String myTopic = "dorm";      //要订阅的主题
     private MqttConnectOptions conOpt;
-    private final String host = "tcp://{ip}:1883";  //eg. tcp://192.168.1.1:1883
+    private final String host = "tcp://39.96.68.13:1883";  //eg. tcp://192.168.1.1:1883
     private final String userName = "admin";
     private final String passWord = "public";
-    private final String clientId = "4B208_" + System.currentTimeMillis();//客户端标识
+    private final String clientId = "xiangbo_" + System.currentTimeMillis();//客户端标识
     private IGetMessageCallBack IGetMessageCallBack;
     // MQTT是否连接成功
     private IMqttActionListener iMqttActionListener = new IMqttActionListener() {

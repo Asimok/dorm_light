@@ -1,0 +1,7 @@
+{
+  "sensor": "light",
+  "light0":true,
+  "light1":false,
+  "light2":false,
+  "light3":false
+}

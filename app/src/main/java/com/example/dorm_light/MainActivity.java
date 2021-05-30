@@ -30,7 +30,6 @@ import static com.example.dorm_light.code.restart_code;
 
 public class MainActivity extends AppCompatActivity implements IGetMessageCallBack {
 
-
     private Button openLeft_button, openRight_button, closeRight_button, closeLeft_button;
     private TextView temp_tv, humi_tv, setLeft_tv, setRight_tv;
     private LinearLayout get_dht11_lv, restart;
@@ -50,10 +49,8 @@ public class MainActivity extends AppCompatActivity implements IGetMessageCallBa
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_land);
-
 
         openLeft_button = findViewById(R.id.openLeft_id);
         openRight_button = findViewById(R.id.openRight_id);
@@ -68,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements IGetMessageCallBa
 
         serviceConnection = new MyServiceConnection();
         serviceConnection.setIGetMessageCallBack(MainActivity.this);
+
         //用Intent方式创建并启用Service
         Intent intent = new Intent(this, MQTTService.class);
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
@@ -110,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements IGetMessageCallBa
                 //按返回键能不能退出
                 adDialog.setCancelable(true);
                 adDialog.show();
-
 
             }
         });
@@ -168,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements IGetMessageCallBa
             Log.d("aaa", humi);
             temp_tv.setText(temp + "°C");
             humi_tv.setText(humi + " %");
-
         }
         if (message.contains("servo")) {
             Log.d("aaa", "解析指令servo");
